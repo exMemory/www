@@ -24,6 +24,7 @@ function addTask(task) {
 
   const li = document.createElement('li');
   li.textContent = task;
+  li.setAttribute('draggable', 'true'); // この行を追加
 
   const deleteBtn = document.createElement('button');
   deleteBtn.textContent = '削除';

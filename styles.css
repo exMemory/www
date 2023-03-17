@@ -44,6 +44,11 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* この行を追加 */
+  user-drag: element;
+  -webkit-user-drag: element;
+  cursor: move;
+  /* この行まで */
 }
 
 li.completed {

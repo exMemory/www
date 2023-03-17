@@ -30,7 +30,7 @@ function addTask(task) {
   deleteBtn.classList.add('delete-btn');
 
   li.appendChild(deleteBtn);
-  taskList.insertBefore(li, taskList.firstChild); // この行を変更
+  taskList.appendChild(li);
 }
 
 // 機能追加：ドラッグで入れ替える

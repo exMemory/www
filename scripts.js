@@ -16,6 +16,7 @@ taskList.addEventListener('click', (event) => {
   }
 });
 
+// この部分を修正
 function addTask(task) {
   if (task.trim() === '') {
     return;
@@ -29,5 +30,36 @@ function addTask(task) {
   deleteBtn.classList.add('delete-btn');
 
   li.appendChild(deleteBtn);
-  taskList.appendChild(li);
+  taskList.insertBefore(li, taskList.firstChild); // この行を変更
 }
+
+// 機能追加：ドラッグで入れ替える
+let draggedTask;
+
+taskList.addEventListener('dragstart', (event) => {
+  draggedTask = event.target;
+  event.dataTransfer.setData('text/plain', '');
+  event.target.style.opacity = '0.5';
+});
+
+taskList.addEventListener('dragover', (event) => {
+  event.preventDefault();
+
+  const target = event.target.closest('li');
+  if (!target || target === draggedTask) {
+    return;
+  }
+
+  const bounding = target.getBoundingClientRect();
+  const offset = bounding.y + bounding.height / 2;
+
+  if (event.clientY - offset > 0) {
+    target.parentElement.insertBefore(draggedTask, target.nextElementSibling);
+  } else {
+    target.parentElement.insertBefore(draggedTask, target);
+  }
+});
+
+taskList.addEventListener('dragend', (event) => {
+  event.target.style.opacity = '';
+});

@@ -24,6 +24,7 @@ function addTask(task) {
 
   const li = document.createElement('li');
   li.textContent = task;
+  li.setAttribute('draggable', 'true'); // この行を追加
 
   const deleteBtn = document.createElement('button');
   deleteBtn.textContent = '削除';
@@ -37,6 +38,10 @@ function addTask(task) {
 let draggedTask;
 
 taskList.addEventListener('dragstart', (event) => {
+  if (event.target.tagName !== 'LI') {
+    return;
+  }
+
   draggedTask = event.target;
   event.dataTransfer.setData('text/plain', '');
   event.target.style.opacity = '0.5';
@@ -61,5 +66,9 @@ taskList.addEventListener('dragover', (event) => {
 });
 
 taskList.addEventListener('dragend', (event) => {
+  if (event.target.tagName !== 'LI') {
+    return;
+  }
+
   event.target.style.opacity = '';
 });

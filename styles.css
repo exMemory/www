@@ -64,3 +64,7 @@ li.completed {
   cursor: pointer;
   padding: 0.5rem;
 }
+
+button {
+  user-select: none; /* この行を追加 */
+}
